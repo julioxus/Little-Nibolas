@@ -2,7 +2,7 @@ package com.codamasters.LNHelpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.codamasters.gameobjects.Horse;
+import com.codamasters.gameobjects.Nibolas;
 import com.codamasters.screens.PantallaActual;
 
 
@@ -10,7 +10,7 @@ public class InputHandler implements InputProcessor {
 	
     private float scaleFactorX;
     private float scaleFactorY;
-    private Horse myNibolas;
+    private Nibolas myNibolas;
     private PantallaActual pantalla;
 
     public InputHandler(PantallaActual miPantalla, float scaleFactorX,
@@ -18,33 +18,25 @@ public class InputHandler implements InputProcessor {
 
         this.scaleFactorX = scaleFactorX;
         this.scaleFactorY = scaleFactorY;
-        myNibolas = miPantalla.getHorse();
+        myNibolas = miPantalla.getNibolas();
         pantalla = miPantalla;
 
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-    	
-    	if(!pantalla.isMuerto()){
-	    	myNibolas.move(screenX, screenY);
-	        
-	        myNibolas.onClick();
+    	if(myNibolas.isVisible())
+    		myNibolas.move(screenX, screenY);
+    	else{
+    		pantalla.salirDePapelera(screenX,screenY);
     	}
-    	else
-    		pantalla.restart();
-    	
-	        return true;
+        return true;
         
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        screenX = scaleX(screenX);
-        screenY = scaleY(screenY);
-
-
-        return false;
+    	return false;
     }
 
     @Override
@@ -54,7 +46,7 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+    	return false;
     }
 
     @Override

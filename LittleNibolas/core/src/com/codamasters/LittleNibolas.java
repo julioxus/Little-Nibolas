@@ -1,12 +1,20 @@
 package com.codamasters;
 
 import com.badlogic.gdx.Game;
-import com.codamasters.screens.PantallaActual;
+import com.codamasters.LNHelpers.AssetLoaderSpace;
+import com.codamasters.LNHelpers.AssetsLoader;
+import com.codamasters.screens.ScreenRome;
+import com.codamasters.screens.logo;
 
 public class LittleNibolas extends Game {
+	
+	public static final String TITLE = "Little Nibolas", VERSION = "0.1";
+	
 	@Override
 	public void create() {
-		setScreen(new PantallaActual());
+		AssetsLoader.load();
+		AssetLoaderSpace.load();
+		setScreen(new logo());
 	}
 
 	@Override

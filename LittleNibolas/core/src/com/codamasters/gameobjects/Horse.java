@@ -23,7 +23,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.codamasters.screens.PantallaActual;
+import com.codamasters.screens.ScreenRome;
 
 public class Horse implements ContactFilter, ContactListener {
 
@@ -34,14 +34,14 @@ public class Horse implements ContactFilter, ContactListener {
 	private Vector3 target = new Vector3();
 	private float movementForce = 5, jumpPower = 10;
 	private World world;
-	private PantallaActual pantalla;
+	private ScreenRome pantalla;
 	private float last_screen_x;
 	private boolean salto_1, salto_2;
 	private boolean mov_ant, mov_nuevo; // true--> Derecha, false-->Izquierda
 	private int num_saltos;
 
 
-	public Horse(World world, PantallaActual pantalla, float x, float y, float width, float height) {
+	public Horse(World world, ScreenRome pantalla, float x, float y, float width, float height) {
 		
 		WIDTH = width;
 		HEIGHT = width * 2;
@@ -67,8 +67,8 @@ public class Horse implements ContactFilter, ContactListener {
 		fixtureDef.density = 3;
 						
 		body = world.createBody(bodyDef);
-		
-		
+		body.setLinearVelocity(5,0);
+
 		fixture = body.createFixture(fixtureDef);
 				
 		shape.dispose();

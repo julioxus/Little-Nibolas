@@ -23,7 +23,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.codamasters.LNHelpers.AnimatedSprite;
-import com.codamasters.screens.PantallaActual;
+import com.codamasters.screens.ScreenRome;
 
 public class Lanza implements ContactFilter, ContactListener {
 
@@ -34,17 +34,17 @@ public class Lanza implements ContactFilter, ContactListener {
 	private Vector3 target = new Vector3();
 	private float movementForce = 5, jumpPower = 10;
 	private World world;
-	private PantallaActual pantalla;
+	private ScreenRome pantalla;
 	private float last_screen_x;
 	private Random rand;
 	private float x,y;
 	private boolean esMortal;
-	private int minVelocidad = 4;
-	private int maxVelocidad = 8;
+	private int minVelocidad = 8;
+	private int maxVelocidad = 18;
 	private int velocidad;
 	private AnimatedSprite animatedSprite;
 	
-	public Lanza(World world, PantallaActual pantalla, float x, float y, float width, float height) {
+	public Lanza(World world, ScreenRome pantalla, float x, float y, float width, float height) {
 		WIDTH = width;
 		HEIGHT = width * 2;
 		this.world = world;
@@ -54,7 +54,7 @@ public class Lanza implements ContactFilter, ContactListener {
 		this.esMortal=true;
 		
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.KinematicBody;
+		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
 		
@@ -72,6 +72,7 @@ public class Lanza implements ContactFilter, ContactListener {
 		
 		rand = new Random();
 		velocidad = minVelocidad + rand.nextInt(maxVelocidad - minVelocidad + 1);
+		
 		body.setLinearVelocity(-velocidad, -9.81f);
 		
 		float minAngulo = 0.2f;
